@@ -18,14 +18,6 @@
   .text-muted {
     color: var(--aw-color-text-muted);
   }
-  .btn-primary{
-    background-color: #F91944;
-    border-color: #F91944;
-  }
-  .btn-primary:hover{
-    background-color: #F91944;
-    border-color: #F91944;
-  }
 }
 
 @layer components {
@@ -101,4 +93,13 @@
 
 .bg-primary{
   background-color: #F91944;
+}
+
+.btn-primary{
+  background-color: #F91944;
+  border-color: #F91944;
+}
+.btn-primary:hover{
+  background-color: #d81a40;
+  border-color: #d81a40;
 }
