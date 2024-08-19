@@ -1,33 +1,35 @@
 ---
-import { UI } from 'astrowind:config';
+// import { UI } from 'astrowind:config';
 
 // TODO: This code is temporary
 ---
 
-<script is:inline define:vars={{ defaultTheme: UI.theme || 'system' }}>
-  function applyTheme(theme) {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+<script is:inline define:vars={{}}>
+  function forceLightTheme() {
+    // Ensure the dark theme is removed
+    document.documentElement.classList.remove('dark');
+
+    // Ensure the light theme is applied
+    document.documentElement.classList.add('light');
+
+    // Force all relevant color scheme toggles to match the light theme
     const matches = document.querySelectorAll('[data-aw-toggle-color-scheme] > input');
-
-    if (matches && matches.length) {
-      matches.forEach((elem) => {
-        elem.checked = theme !== 'dark';
-      });
+    if (matches.length) {
+        matches.forEach((elem) => {
+            elem.checked = false; // Ensure all toggles are unchecked for light theme
+        });
     }
-  }
 
-  if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
-    applyTheme(defaultTheme.replace(':only', ''));
-  } else if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    applyTheme('dark');
-  } else {
-    applyTheme('light');
-  }
+    // Explicitly set localStorage to 'light' to override user preference
+    localStorage.setItem('theme', 'light');
+
+    // Optionally, you can also override system preference media queries if needed
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', '#FFFFFF'); // Light color, adjust as needed
+    }
+}
+
+// Force the light theme on page load
+forceLightTheme();
 </script>

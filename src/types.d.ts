@@ -284,3 +284,12 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+export interface ProductCard extends Omit<Headline, 'classes'>, Widget {
+  itemName?: string;
+  itemCategory?: string;
+  image?: string | unknown;
+  itemDescription?: string;
+  price?: number | string;
+}
+

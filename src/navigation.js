@@ -19,7 +19,7 @@ export const headerData = {
       href: '#find-us'
     },
   ],
-  actions: [{ text: 'Menu', href: '', target: 'Menu' }],
+  actions: [{ text: 'Menu', href: '/ommiMenu', target: 'Menu' }],
 };
 
 export const footerData = {
@@ -30,7 +30,7 @@ export const footerData = {
         { text: 'Home', href: '/' },
         { text: 'About Us', href: '/#about' },
         { text: 'What We Strive To Achieve', href: '/#strive' },
-        { text: 'Menu', href: '#' },
+        { text: 'Menu', href: '/ommiMenu' },
         { text: 'Find Us', href: '/#find-us'}
       ],
     },
@@ -45,6 +45,6 @@ export const footerData = {
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
   ],
   footNote: `
-    Ommi Developed By PrismLebanon · All rights reserved.
+    Developed By PrismLebanon · All rights reserved.
   `,
 };
