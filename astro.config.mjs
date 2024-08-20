@@ -10,6 +10,7 @@ import compress from 'astro-compress';
 import astrowind from './vendor/integration';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter.mjs';
 import react from "@astrojs/react";
+import tunnel from "astro-tunnel";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const hasExternalScripts = false;
 const whenExternalScripts = (items = []) => hasExternalScripts ? Array.isArray(items) ? items.map(item => item()) : [items()] : [];
@@ -42,7 +43,7 @@ export default defineConfig({
     Logger: 1
   }), astrowind({
     config: './src/config.yaml'
-  }), react()],
+  }), react(), tunnel()],
   image: {
     service: squooshImageService(),
     domains: ['cdn.pixabay.com']

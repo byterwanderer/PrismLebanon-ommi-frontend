@@ -1,15 +1,98 @@
 ---
-import Layout from "~/layouts/PageLayout.astro";
-import ProductCard from "~/components/widgets/ProductCard.astro"
+import ProductCard from '~/components/widgets/ProductCard.astro';
+import { supabase } from '~/lib/supabase';
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
 
 const metadata = {
   title: 'Ommi Menu',
   ignoreTitleTemplate: true,
 };
----
 
+// Define the types for the menu items and images
+interface MenuItem {
+  id: number;
+  item_name: string;
+  item_description: string;
+  price: number;
+  image_id: number;
+}
+
+interface Image {
+  id: number;
+  url: string;
+}
+
+// Fetch menu items from the menu_items table
+const { data: menuItems, error: menuError } = await supabase
+  .from('menu_items')
+  .select('id, item_name, item_description, item_price');
+
+// Fetch images from the files table
+const { data: images, error: imagesError } = await supabase
+  .from('files')
+  .select('id, url');
+
+// Handle errors
+if (menuError) {
+  console.error('Error fetching menu items:', menuError);
+}
+if (imagesError) {
+  console.error('Error fetching images:', imagesError);
+}
+
+// Merge menu items with their corresponding images
+const mergedItems = menuItems?.map((item) => {
+  const image = images?.find((img) => img.id === item.id);
+  return {
+    ...item,
+    image_url: image?.url || '', // Default to an empty string if no image is found
+  };
+});
+
+const hasMenuItems = Array.isArray(mergedItems) && mergedItems.length > 0;
+---
 <Layout metadata={metadata}>
-  <ProductCard>
-    
-  </ProductCard>
+  <HeroText id="MenuTitle">
+    <Fragment slot="title"> Ommi Menu </Fragment>
+  </HeroText>
+  <section class="menu-container">
+    <div class="menu">
+      {hasMenuItems ? (
+        mergedItems.map((item) => (
+          <ProductCard
+            item_name={item.item_name}
+            item_description={item.item_description}
+            price={item.item_price}
+            image_src={item.image_url}
+          />
+        ))
+      ) : (
+        <p>No menu items available.</p>
+      )}
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .menu-container {
+    display: flex;
+    justify-content: center; /* Center the grid container horizontally */
+    padding: 2rem;
+  }
+
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto; /* Center the grid items when they are fewer than the grid columns */
+  }
+
+  @media (max-width: 768px) {
+    .menu {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column size for smaller screens */
+    }
+  }
+</style>
