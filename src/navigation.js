@@ -7,19 +7,22 @@ export const headerData = {
       href: '/',
     },
     {
+      text: 'Brunch Menu',
+      href: '/ommiweb'
+    },
+    {
       text: 'About Us',
       href: '#about',
     },
     {
-      text: 'Best Sellers',
+      text: 'Story',
       href: '#',
     },
     {
-      text: 'Find Us',
-      href: '#find-us'
-    },
+      text: 'Offerings',
+      href: '#',
+    }
   ],
-  actions: [{ text: 'Menu', href: '/ommiMenu', target: 'Menu' }],
 };
 
 export const footerData = {
