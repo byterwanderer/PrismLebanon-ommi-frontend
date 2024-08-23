@@ -7,7 +7,7 @@ export const headerData = {
       href: '/',
     },
     {
-      text: 'Brunch Menu',
+      text: 'Brunch',
       href: '/ommiweb'
     },
     {
