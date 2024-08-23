@@ -1,6 +1,6 @@
 site:
-  name: Ommi
-  site: 'https://ommiweb.netlify.app'
+  name: Ummi's
+  site: 'https://ummisweb.netlify.app'
   base: '/'
   trailingSlash: false
 
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: Ommi
+    default: Ummi's
     template: '%s — AstroWind'
   description: "Simple, Fresh, Yet Delicious"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: Ommi
+    site_name: Ummi's
     images:
       - url: '~/assets/images/default.png'
         width: 1200

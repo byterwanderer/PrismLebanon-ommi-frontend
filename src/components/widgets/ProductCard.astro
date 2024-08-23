@@ -1,82 +1,82 @@
 ---
-const { item_name, item_description, price, image_src } = Astro.props;
+
+type Tag = {
+  name: string;
+  color: string;
+  class: string;
+};
+
+export interface Props {
+  title: string;
+  description: string;
+  price: string;
+  tags?: Tag[];
+  image?: string | unknown;
+}
+
+const { title, description, price, tags }: Props = Astro.props;
 ---
 
 <div class="product-card">
-  <div class="image-container">
-    <img src={image_src} alt={item_name} />
-  </div>
-  <div class="item-content">
-    <h3 class="item-name" id="item-name">{item_name}</h3>
-    <p class="item-description">{item_description}</p>
-    <div class="price-container">
-      <p class="item-price">${price?.toFixed(2) || 'N/A'}</p>
+  <h3 class="item-title">{title}</h3>
+  <p class="item-description">{description}</p>
+  <p class="item-price">{price}</p>
+  {tags && (
+    <div class="tags">
+      {Array.isArray(tags) ? (
+        tags.map((tag, index) => (
+          <span
+            class={`tag ${tag.class}`}
+            style={{ color: tag.color }}
+          >
+            {tag.name}
+            {index < tags.length - 1 && <span class="separator"> | </span>}
+          </span>
+        ))
+      ) : (
+        <span class="tag">{tags}</span>
+      )}
     </div>
-  </div>
+  )}
 </div>
 
 <style>
 .product-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Ensure space is distributed */
-    align-items: center;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    height: 100%; /* Ensure card height takes up available space */
+  font-family: sans-serif;
+  margin-bottom: 2rem;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.image-container {
-    width: 100%;
-    aspect-ratio: 4 / 3; /* Use the aspect-ratio property for a 4:3 ratio */
-    overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    background-color: #f0f0f0; /* Fallback background */
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.item-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Space out content */
-    flex-grow: 1; /* Allow content to grow and push price to the bottom */
-    width: 100%; /* Ensure content takes full width */
-    text-align: center; /* Center text for the item name and price */
-}
-
-.item-name {
-    font-weight: bold; /* Make item name bold */
-    margin: 0.5rem 0;
-    font-size: 1.2rem;
-    color: #333;
-    text-transform: capitalize;
+.item-title {
+  text-transform: capitalize;
+  font-weight: bolder;
+  color: #2e518b;
 }
 
 .item-description {
-    margin: 0.25rem 0;
-    font-size: 1rem;
-    color: #666;
-    text-align: justify; /* Justify the text of the description */
-    text-align-last: center; /* Center the last line of justified text */
+  font-style: italic;
+  color: #444;
 }
 
-.price-container {
-    margin-top: auto; /* Push price to the bottom */
-    text-align: center; /* Center text for the price */
+.item-price {
+  font-weight: bolder;
+  color: #333;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
 }
 
+.tag {
+  display: inline-block;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0.05rem;
+}
+
+.separator {
+  color: #999;
+  margin: 0 0.05rem; /* Space around the pipe character */
+}
 </style>
