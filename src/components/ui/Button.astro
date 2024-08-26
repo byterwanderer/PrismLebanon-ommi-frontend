@@ -10,6 +10,7 @@ const {
   icon = '',
   class: className = '',
   type,
+  disabled = false,
   ...rest
 } = Astro.props;
 
@@ -30,6 +31,7 @@ const variants = {
   ) : (
     <a
       class={twMerge(variants[variant] || '', className)}
+      disabled={disabled}
       {...(target ? { target: target, rel: 'noopener noreferrer' } : {})}
       {...rest}
     >

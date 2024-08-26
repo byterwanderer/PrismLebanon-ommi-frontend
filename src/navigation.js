@@ -12,15 +12,15 @@ export const headerData = {
     },
     {
       text: 'About Us',
-      href: '#about',
+      href: '/#about',
     },
     {
       text: 'Story',
-      href: '#',
+      href: '/about',
     },
     {
       text: 'Offerings',
-      href: '#',
+      href: '/pricing',
     }
   ],
 };
@@ -31,10 +31,10 @@ export const footerData = {
       title: 'What Are You Looking For?',
       links: [
         { text: 'Home', href: '/' },
-        { text: 'About Us', href: '/#about' },
-        { text: 'What We Strive To Achieve', href: '/#strive' },
         { text: 'Menu', href: '/ommiMenu' },
-        { text: 'Find Us', href: '/#find-us'}
+        { text: 'About Us', href: '/#about' },
+        { text: 'Our Story', href: '/about'},
+        { text: 'Our Offerings', href: '/pricing' },
       ],
     },
   ],
