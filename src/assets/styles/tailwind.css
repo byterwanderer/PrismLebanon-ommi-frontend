@@ -92,14 +92,18 @@
 }
 
 .bg-primary{
-  background-color: #F91944;
+  background-color: #a1b5a9;
 }
 
 .btn-primary{
-  background-color: #F91944;
-  border-color: #F91944;
+  background-color: #50685a;
+  border-color: #50685a;
 }
 .btn-primary:hover{
-  background-color: #d81a40;
-  border-color: #d81a40;
+  background-color: #3d5045;
+  border-color: #3d5045;
+}
+
+.text-primary {
+  color: #50685a;
 }
