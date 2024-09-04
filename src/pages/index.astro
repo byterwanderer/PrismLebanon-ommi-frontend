@@ -2,7 +2,8 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
+// import Features from '~/components/widgets/Features.astro';
+import Prices from '~/components/widgets/Pricing.astro';
 // import Steps from '~/components/widgets/Steps.astro';
 // import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 // import FAQs from '~/components/widgets/FAQs.astro';
@@ -63,7 +64,7 @@ const metadata = {
 
   <!-- Features Widget *************** -->
 
-  <Features
+  <!-- <Features
     id="strive"
     tagline="Why We Do This"
     title="What We Strive To Achieve"
@@ -101,6 +102,109 @@ const metadata = {
         description:
           'We are committed to our community, supporting local initiatives, partnering with nearby farms, and participating in charitable events',
         icon: 'tabler:empathize',
+      },
+    ]}
+  /> -->
+
+  <Prices
+    title="Our Offerings"
+    prices={[
+      {
+        title: 'Brunch',
+        subtitle: 'Exeptional and Nostalgic Taste',
+        items: [
+          {
+            description: 'Etiam in libero, et volutpat',
+          },
+          {
+            description: 'Aenean ac nunc dolor tristique',
+          },
+          {
+            description: 'Cras scelerisque accumsan lib',
+          },
+          {
+            description: 'In hac habitasse',
+          },
+        ],
+        callToAction: {
+          target: 'UmmisBrunchMenu',
+          text: 'Brunch Menu',
+          href: '/ommiMenu',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'available',
+      },
+      {
+        title: 'Events',
+        subtitle: 'Optimal choice for small teams',
+        items: [
+          {
+            description: 'Proin vel laoreet',
+          },
+          {
+            description: 'Ut efficitur habitasse egestas',
+          },
+          {
+            description: 'Volutpat hac curabitur',
+          },
+          {
+            description: 'Pellentesque blandit ut nibh',
+          },
+          {
+            description: 'Donec fringilla sem',
+          },
+        ],
+        callToAction: {
+          target: '_blank',
+          text: 'Coming Soon',
+          href: '#',
+        },
+      },
+      {
+        title: 'Catering',
+        subtitle: 'Optimal choice for companies',
+        items: [
+          {
+            description: 'Curabitur suscipit risus',
+          },
+          {
+            description: 'Aliquam habitasse malesuada',
+          },
+          {
+            description: 'Suspendisse sit amet blandit',
+          },
+          {
+            description: 'Suspendisse auctor blandit dui',
+          },
+        ],
+        callToAction: {
+          target: '_blank',
+          text: 'Coming Soon',
+          href: '#',
+        },
+      },
+      {
+        title: 'Cooking Classes',
+        subtitle: 'Optimal choice for companies',
+        items: [
+          {
+            description: 'Curabitur suscipit risus',
+          },
+          {
+            description: 'Aliquam habitasse malesuada',
+          },
+          {
+            description: 'Suspendisse sit amet blandit',
+          },
+          {
+            description: 'Suspendisse auctor blandit dui',
+          },
+        ],
+        callToAction: {
+          target: '_blank',
+          text: 'Coming Soon',
+          href: '#',
+        },
       },
     ]}
   />

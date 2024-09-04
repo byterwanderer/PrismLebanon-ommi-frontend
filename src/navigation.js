@@ -7,21 +7,17 @@ export const headerData = {
       href: '/',
     },
     {
-      text: 'Brunch',
+      text: 'Menu',
       href: '/ommiMenu'
     },
     {
-      text: 'About Us',
-      href: '/#about',
+      text: 'Offerings',
+      href: '/pricing',
     },
     {
       text: 'Story',
       href: '/about',
     },
-    {
-      text: 'Offerings',
-      href: '/pricing',
-    }
   ],
 };
 

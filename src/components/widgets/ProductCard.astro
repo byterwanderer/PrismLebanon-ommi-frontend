@@ -1,5 +1,4 @@
 ---
-
 type Tag = {
   name: string;
   color: string;
@@ -11,17 +10,22 @@ export interface Props {
   description: string;
   price: string;
   tags?: Tag[];
-  image?: string | unknown;
+  image?: string; // Ensure this matches your data type
 }
 
-const { title, description, price, tags }: Props = Astro.props;
+const { title, description, price, tags = [], image } = Astro.props;
+const numericPrice = Number(price); // Ensure price is a number
 ---
-
 <div class="product-card">
-  <h3 class="item-title">{title}</h3>
-  <p class="item-description">{description}</p>
-  <p class="item-price">{price}</p>
-  {tags && (
+  {image && (
+    <div class="product-image">
+      <img src={image} alt={title} />
+    </div>
+  )}
+  <div class="product-content">
+    <h3 class="item-title">{title}</h3>
+    <p class="item-description">{description}</p>
+    <span class="item_price">${numericPrice.toFixed(2)}</span>
     <div class="tags">
       {Array.isArray(tags) ? (
         tags.map((tag, index) => (
@@ -37,16 +41,34 @@ const { title, description, price, tags }: Props = Astro.props;
         <span class="tag">{tags}</span>
       )}
     </div>
-  )}
+  </div>
 </div>
 
 <style>
-.product-card {
-  font-family: sans-serif;
-  margin-bottom: 2rem;
-}
+  .product-card {
+    font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  }
 
-.item-title {
+  .product-image {
+    flex: 0 0 150px; /* Fixed width for the image */
+    height: 150px; /* Fixed height to maintain aspect ratio */
+    background: none;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding-top: 1.5rem;
+  }
+  .product-image img {
+    width: 100%; /* Ensure the image fills the container */
+    height: 100%; /* Ensure the image fills the container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    display: block;
+    border-radius: 20px;
+  }
+
+  .item-title {
   text-transform: capitalize;
   font-weight: bolder;
   color: #2e518b;
@@ -78,5 +100,29 @@ const { title, description, price, tags }: Props = Astro.props;
 .separator {
   color: #999;
   margin: 0 0.05rem; /* Space around the pipe character */
+}
+
+@media (min-width: 768px) {
+  .product-card {
+    flex-direction: row; /* Align items horizontally on larger screens */
+  }
+
+  .product-image {
+    flex: 0 0 150px; /* Fixed width for the image */
+    height: 150px; /* Fixed height to maintain aspect ratio */
+  }
+
+  .product-content {
+    padding: 1rem 1.5rem;
+    flex: 1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-card {
+    max-width: 800px; /* Limit the maximum width for large screens */
+    /* margin-left: auto; */
+    margin-right: auto;
+  }
 }
 </style>
