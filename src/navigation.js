@@ -12,7 +12,7 @@ export const headerData = {
     },
     {
       text: 'Offerings',
-      href: '/pricing',
+      href: '/#pricing',
     },
     {
       text: 'Story',

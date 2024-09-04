@@ -51,7 +51,7 @@ const metadata = {
 
   <Note />
 
-  <HeroText id="about">
+  <HeroText id="about" callToAction2=>
     <Fragment slot="title"> About Us </Fragment>
 
     <Fragment slot="content">
@@ -61,7 +61,13 @@ const metadata = {
       necessitatibus, ab, veniam facere sed obcaecati blanditiis tenetur doloribus neque sunt. Similique!
     </Fragment>
   </HeroText>
-
+  <Hero
+    actions={[
+      {text: 'Learn more about our story', href:'about'}
+    ]}
+  >
+  </Hero>
+    
   <!-- Features Widget *************** -->
 
   <!-- <Features
@@ -107,6 +113,7 @@ const metadata = {
   /> -->
 
   <Prices
+    id="pricing"
     title="Our Offerings"
     prices={[
       {

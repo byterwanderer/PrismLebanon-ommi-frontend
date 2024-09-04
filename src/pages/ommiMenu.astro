@@ -73,7 +73,7 @@ const categorizedMenuItems = (item_categories || []).map(category => {
         .filter(tag => tag); // Remove any null tags
 
       // Fetch image for the item
-      const imageData = (files || []).find(file => file.id === item.id);
+      const imageData = (files || []).find(file => file.file_item_uuid === item.item_uuid);
 
       return {
         ...item,
