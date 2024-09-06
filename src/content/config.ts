@@ -1,4 +1,58 @@
 import { z, defineCollection } from 'astro:content';
+// import { gql, GraphQLClient } from 'graphql-request';
+
+// const graphql = new GraphQLClient('https://ommi-strapi-base.onrender.com/graphql');
+
+// const gqlQuery = gql`
+//   {
+//     menuItems {
+//       data {
+//         id
+//         attributes {
+//           itemName
+//           itemDescription
+//           itemPrice
+//           item_category {
+//             data {
+//               id
+//               attributes {
+//                 categoryName
+//                 categoryDescription
+//                 categorySubtext
+//               }
+//             }
+//           }
+//           item_image {
+//             data {
+//               id
+//               attributes {
+//                 url
+//               }
+//             }
+//           }
+//           item_tags {
+//             data {
+//               id
+//               attributes {
+//                 tagName
+//                 tagColorHEX
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
+
+// const menuItems = defineCollection({
+//   loader: async () => {
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     const { menuItems }: any = await graphql.request(gqlQuery);
+
+//     return menuItems;
+//   },
+// })
 
 const metadataDefinition = () =>
   z
@@ -65,4 +119,5 @@ const postCollection = defineCollection({
 
 export const collections = {
   post: postCollection,
+  // menuItems: menuItems,
 };

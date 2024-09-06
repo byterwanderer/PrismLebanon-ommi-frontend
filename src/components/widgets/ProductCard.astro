@@ -8,13 +8,13 @@ type Tag = {
 export interface Props {
   title: string;
   description: string;
-  price: string;
+  price: number;
   tags?: Tag[];
   image?: string; // Ensure this matches your data type
 }
 
 const { title, description, price, tags = [], image } = Astro.props;
-const numericPrice = Number(price); // Ensure price is a number
+const numericPrice = price; // Ensure price is a number
 ---
 <div class="product-card">
   {image && (
@@ -52,8 +52,9 @@ const numericPrice = Number(price); // Ensure price is a number
   }
 
   .product-image {
-    flex: 0 0 150px; /* Fixed width for the image */
+    /* flex: 0 0 150px; */ /* Fixed width for the image */
     height: 150px; /* Fixed height to maintain aspect ratio */
+    width: auto;
     background: none;
     /* display: flex; */
     /* align-items: center; */

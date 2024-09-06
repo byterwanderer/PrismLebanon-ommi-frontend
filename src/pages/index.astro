@@ -10,48 +10,53 @@ import Prices from '~/components/widgets/Pricing.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 // import Content from '~/components/widgets/Content.astro';
+import Button from '~/components/ui/Button.astro';
+
+// Importing Tabler Icons
+import { IconBrandTwitter, IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
 
 const metadata = {
-  title: 'Ummi\'s',
+  title: "Ummi's",
   ignoreTitleTemplate: true,
 };
 
+const socialLinks = [
+  { name: 'Twitter', url: 'https://twitter.com', icon: IconBrandTwitter },
+  { name: 'Facebook', url: 'https://facebook.com', icon: IconBrandFacebook },
+  { name: 'Instagram', url: 'https://instagram.com', icon: IconBrandInstagram },
+];
 ---
 
 <Layout metadata={metadata}>
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
-
   <!-- Hero Widget ******************* -->
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Check Out The Menu',
-        href: '/ommiMenu',
-        target: '_blank',
-        icon: 'tabler:arrow-big-right-lines',
-      },
-      { text: 'Learn more', href: '#about' },
-    ]}
-    image={{ src: '~/assets/images/mezze-hero.jpg', alt: 'Ommi Hero Image' }}
-  >
-    <Fragment slot="title"> Ummi's </Fragment>
+  <div>
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline"> <span class="font-semibold">Taste</span> The Tradition With Every Bite</span>
-    </Fragment>
-  </Hero>
+    <Hero
+      actions={[
+        {
+          variant: 'primary',
+          text: 'Check Out The Menu',
+          href: '/ommiMenu',
+          target: '_blank',
+          icon: 'tabler:arrow-big-right-lines',
+        },
+        { text: 'Learn more', href: '#about' },
+      ]}
+      image={{ src: '~/assets/images/mezze-hero.jpg', alt: 'Ommi Hero Image' }}
+    >
+      <Fragment slot="title"> Ummi's </Fragment>
 
+      <Fragment slot="subtitle">
+        <span class="hidden sm:inline"> <span class="font-semibold">Taste</span> The Tradition With Every Bite</span>
+      </Fragment>
+    </Hero>
+  </div>
   <!-- Note Widget ******************* -->
 
   <Note />
 
-  <HeroText id="about" callToAction2=>
+  <HeroText id="about" callToAction2="">
     <Fragment slot="title"> About Us </Fragment>
 
     <Fragment slot="content">
@@ -60,57 +65,13 @@ const metadata = {
       dolor sit amet consectetur adipisicing elit. Magnam amet error eum doloremque id earum, corrupti numquam sequi
       necessitatibus, ab, veniam facere sed obcaecati blanditiis tenetur doloribus neque sunt. Similique!
     </Fragment>
-  </HeroText>
-  <Hero
-    actions={[
-      {text: 'Learn more about our story', href:'about'}
-    ]}
-  >
-  </Hero>
-    
-  <!-- Features Widget *************** -->
 
-  <!-- <Features
-    id="strive"
-    tagline="Why We Do This"
-    title="What We Strive To Achieve"
-    subtitle=""
-    items={[
-      {
-        title: 'Nostalgic Taste',
-        description: 'To Remind you Of Your Mothers Delicious Cooking',
-        icon: 'tabler:mood-heart',
-      },
-      {
-        title: 'Freshness Is Key',
-        description: 'Great Taste While Maintaining The Freshness Of The Ingredients',
-        icon: 'tabler:leaf',
-      },
-      {
-        title: 'Customer Satisfaction',
-        description:
-          'Your satisfaction is our priority. We value your feedback and strive to provide exceptional service every visit',
-        icon: 'tabler:rosette-discount-check',
-      },
-      {
-        title: 'Innovation',
-        description: 'Innovation drives us. We explore new culinary trends to bring fresh, exciting dishes to our menu',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Sustainability',
-        description:
-          'We prioritize sustainability by using locally-grown, organic ingredients and eco-friendly practices to reduce our environmental impact',
-        icon: 'tabler:plant',
-      },
-      {
-        title: 'Community Engagement',
-        description:
-          'We are committed to our community, supporting local initiatives, partnering with nearby farms, and participating in charitable events',
-        icon: 'tabler:empathize',
-      },
-    ]}
-  /> -->
+    <Fragment slot="callToAction">
+      <div id="about_button" class="flex w-full sm:w-auto">
+        <Button href={'/about'}>Learn more about our story</Button>
+      </div>
+    </Fragment>
+  </HeroText>
 
   <Prices
     id="pricing"
@@ -136,7 +97,7 @@ const metadata = {
         callToAction: {
           target: 'UmmisBrunchMenu',
           text: 'Brunch Menu',
-          href: '/ommiMenu',
+          href: '/ummisMenu',
         },
         hasRibbon: true,
         ribbonTitle: 'available',
@@ -219,23 +180,19 @@ const metadata = {
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Check Out Our Menu',
-        href: '/ommiMenu',
-        target: '_blank',
-        icon: 'tabler:arrow-right-to-arc',
-      },
-    ]}
+    socialLinks={socialLinks}
   >
-    <Fragment slot="title"> So What Are You Going To Choose? </Fragment>
+    <Fragment slot="title"> Follow Us on Social Media </Fragment>
 
     <Fragment slot="subtitle">
-      Choose From Our Great Selection Of Delicious And Memorable Dishes. <br class="hidden md:inline" />Don't waste more
-      time And Get Something Now! :P
+      Follow us on social platforms to stay in loop on evrything Ummi's. <br class="hidden md:inline" />No Time To Waste! :P
     </Fragment>
   </CallToAction>
-
-  <script type="module" src="/src/lib/smooth-scroll.js" defer></script>
 </Layout>
+
+<style>
+  #about_button {
+    /* align-items: center; */
+    padding-top: 20px;
+  }
+</style>

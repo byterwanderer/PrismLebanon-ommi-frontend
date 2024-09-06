@@ -8,7 +8,7 @@ export const headerData = {
     },
     {
       text: 'Menu',
-      href: '/ommiMenu'
+      href: '/ummisMenu'
     },
     {
       text: 'Offerings',
@@ -27,7 +27,7 @@ export const footerData = {
       title: 'What Are You Looking For?',
       links: [
         { text: 'Home', href: '/' },
-        { text: 'Menu', href: '/ommiMenu' },
+        { text: 'Menu', href: '/ummisMenu' },
         { text: 'About Us', href: '/#about' },
         { text: 'Our Story', href: '/about'},
         { text: 'Our Offerings', href: '/pricing' },
