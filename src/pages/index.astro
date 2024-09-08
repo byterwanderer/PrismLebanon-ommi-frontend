@@ -30,27 +30,30 @@ const socialLinks = [
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <div>
+  <div class="heroSection">
+    <div class="heroOverlay"></div>
+    <img id="heroSectionBackImage" src="src/assets/images/resizedArabiantable002-915415594.jpg" alt="mezze table image" />
+    <div id="heroElement">
+      <Hero
+        actions={[
+          {
+            variant: 'primary',
+            text: 'Check Out The Menu',
+            href: '/ummisMenu',
+            target: '_blank',
+            icon: 'tabler:arrow-big-right-lines',
+          },
+          { text: 'Learn more', href: '#about' },
+        ]}
+        image={{ src: '~/assets/images/mezze-hero.jpg', alt: 'Ommi Hero Image' }}
+      >
+        <Fragment slot="title"> Ummi's </Fragment>
 
-    <Hero
-      actions={[
-        {
-          variant: 'primary',
-          text: 'Check Out The Menu',
-          href: '/ommiMenu',
-          target: '_blank',
-          icon: 'tabler:arrow-big-right-lines',
-        },
-        { text: 'Learn more', href: '#about' },
-      ]}
-      image={{ src: '~/assets/images/mezze-hero.jpg', alt: 'Ommi Hero Image' }}
-    >
-      <Fragment slot="title"> Ummi's </Fragment>
-
-      <Fragment slot="subtitle">
-        <span class="hidden sm:inline"> <span class="font-semibold">Taste</span> The Tradition With Every Bite</span>
-      </Fragment>
-    </Hero>
+        <!-- <Fragment slot="subtitle">
+          <span class="hidden sm:inline"> <span class="font-semibold">Taste</span> The Tradition With Every Bite</span>
+        </Fragment> -->
+      </Hero>
+    </div>
   </div>
   <!-- Note Widget ******************* -->
 
@@ -179,13 +182,12 @@ const socialLinks = [
 
   <!-- CallToAction Widget *********** -->
 
-  <CallToAction
-    socialLinks={socialLinks}
-  >
+  <CallToAction socialLinks={socialLinks}>
     <Fragment slot="title"> Follow Us on Social Media </Fragment>
 
     <Fragment slot="subtitle">
-      Follow us on social platforms to stay in loop on evrything Ummi's. <br class="hidden md:inline" />No Time To Waste! :P
+      Follow us on social platforms to stay in loop on evrything Ummi's. <br class="hidden md:inline" />No Time To
+      Waste! :P
     </Fragment>
   </CallToAction>
 </Layout>
@@ -195,4 +197,72 @@ const socialLinks = [
     /* align-items: center; */
     padding-top: 20px;
   }
+
+  .heroSection {
+  position: relative;
+  overflow: hidden; /* Ensure that no content overflows the container */
+  height: 100vh; /* Full viewport height */
+  color: white; /* Text color */
+}
+
+/* Style for the background image */
+#heroSectionBackImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire container */
+  z-index: -1; /* Place the image behind other content */
+}
+
+/* Style for the overlay */
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  z-index: 1; /* Place the overlay above the background image */
+}
+
+/* Style for the hero content container */
+#heroElement {
+  position: relative;
+  z-index: 2; /* Ensure the content is above the overlay */
+  text-align: center; /* Center align text */
+  padding: 2rem; /* Space around the content */
+  color: white; /* Text color */
+}
+
+/* Styles for the Hero component */
+.Hero {
+  display: inline-block; /* Ensure the Hero component behaves like a block-level element */
+  background: rgba(0, 0, 0, 0.3); /* Optional: Add a semi-transparent background to make text more readable */
+  border-radius: 8px; /* Optional: Rounded corners */
+  padding: 2rem; /* Space inside the Hero component */
+}
+
+/* Styles for the title */
+.Hero .title {
+  font-size: 2.5rem; /* Adjust size as needed */
+  font-weight: bold; /* Make the title bold */
+  margin-bottom: 1rem; /* Space below the title */
+}
+
+/* Styles for the subtitle */
+.Hero .subtitle {
+  font-size: 1.25rem; /* Adjust size as needed */
+  font-weight: 600; /* Slightly bold */
+}
+
+/* Responsive design for the subtitle */
+@media (max-width: 640px) {
+  .Hero .subtitle span {
+    display: block; /* Stack the subtitle text on smaller screens */
+    font-size: 1rem; /* Adjust font size for smaller screens */
+    color: white !important;
+  }
+}
 </style>

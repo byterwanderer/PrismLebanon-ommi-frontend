@@ -32,8 +32,8 @@ const metadata = {
 
 const gqlQUERY = `
 query GetMenuItems{
-  menuItems (pagination: {limit: 100}) {
-    data {
+menuItems (pagination: {limit: 100}){
+  data {
       id
       attributes {
         itemName
