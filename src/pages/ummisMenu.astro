@@ -5,6 +5,11 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 // import { useState, useEffect } from "react";
 
+type Additive = {
+  additiveName: string;
+  additivePrice: number;
+};
+
 interface Tag {
   name: string;
   color: string;
@@ -16,6 +21,7 @@ interface Item {
   item_price: number;
   tags: Tag[];
   item_image_url: string;
+  additives: Additive[];
 }
 
 interface Category {
@@ -66,6 +72,15 @@ menuItems (pagination: {limit: 100}){
             }
           }
         }
+        item_additives{
+          data{
+            id
+            attributes{
+              ItemAdditiveName
+              ItemAdditivePrice
+            }
+          }
+        }
       }
     }
   }
@@ -97,6 +112,11 @@ const fetchMenuItems = async () => {
       };
     }
 
+    const additives: Additive[] = menuItem.attributes.item_additives?.data.map((additive) => ({
+      additiveName: additive.attributes.ItemAdditiveName,
+      additivePrice: additive.attributes.ItemAdditivePrice,
+    })) || [];
+
     categories[categoryName].items.push({
       item_name: menuItem.attributes.itemName,
       item_description: menuItem.attributes.itemDescription,
@@ -106,10 +126,11 @@ const fetchMenuItems = async () => {
         color: tag.attributes.tagColorHEX,
       })) || [],
       item_image_url: menuItem.attributes.item_image?.data?.attributes?.url || '',
+      additives, // Add item additives here
     });
 
     return categories;
-  }, {});
+  }, {} as Record<string, Category>);
 
   return Object.values(categorizedMenuItems);
 };
@@ -140,6 +161,7 @@ const categorizedMenuItems = await fetchMenuItems();
                   class: `tag-${tag.name.replace(/\s+/g, '-').toLowerCase()}`
                 }))}
                 image={item.item_image_url}
+                additives={item.additives}
               />
             ))}
           </div>
