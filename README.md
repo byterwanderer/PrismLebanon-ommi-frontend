@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cd74762a-011c-4061-a136-e6c3fd624b7f/deploy-status)](https://app.netlify.com/sites/ummisweb/deploys)
+
 # 🚀 AstroWind
 
 <img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/lighthouse-score.png" align="right"
