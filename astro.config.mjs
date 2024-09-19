@@ -24,7 +24,7 @@ export default defineConfig({
   }), sitemap(), mdx(), icon({
     include: {
       tabler: ['*'],
-      'flat-color-icons': ['template', 'gallery', 'approval', 'document', 'advertising', 'currency-exchange', 'voice-presentation', 'business-contact', 'database']
+      // 'flat-color-icons': ['template', 'gallery', 'approval', 'document', 'advertising', 'currency-exchange', 'voice-presentation', 'business-contact', 'database']
     }
   }), ...whenExternalScripts(() => partytown({
     config: {
@@ -58,5 +58,8 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src')
       }
     }
+  },
+  optimizeDeps: {
+    include: ['cheerio']
   }
 });
