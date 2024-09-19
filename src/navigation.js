@@ -18,6 +18,10 @@ export const headerData = {
       text: 'Story',
       href: '/about',
     },
+    {
+      text: 'Contact',
+      href: '/contact'
+    }
   ],
 };
 
@@ -31,6 +35,7 @@ export const footerData = {
         { text: 'About Us', href: '/#about' },
         { text: 'Our Story', href: '/about'},
         { text: 'Our Offerings', href: '/pricing' },
+        { text: 'Talk To Us', href: '/contact'}
       ],
     },
   ],
@@ -39,9 +44,9 @@ export const footerData = {
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
   socialLinks: [
-    { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
+    { ariaLabel: 'Twitter', icon: 'tabler:brand-twitter', href: '#' },
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
+    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
   ],
   footNote: `
     Developed By PrismLebanon · All rights reserved.
