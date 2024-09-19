@@ -1,6 +1,5 @@
 ---
 import ProductCard from '~/components/widgets/ProductCard.astro';
-// import { supabase } from '~/lib/supabase';
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 // import { useState, useEffect } from "react";
@@ -36,177 +35,177 @@ const metadata = {
   ignoreTitleTemplate: true,
 };
 
-const gqlQUERY = `
-query GetMenuItems{
-menuItems (pagination: {limit: 100}){
-  data {
-      id
-      attributes {
-        itemName
-        itemDescription
-        itemPrice
-        item_category {
-          data {
-            id
-            attributes {
-              categoryName
-              categoryDescription
-              categorySubtext
-            }
-          }
-        }
-        item_image {
-          data {
-            id
-            attributes {
-              url
-            }
-          }
-        }
-        item_tags {
-          data {
-            id
-            attributes {
-              tagName
-              tagColorHEX
-            }
-          }
-        }
-        item_additives{
-          data{
-            id
-            attributes{
-              ItemAdditiveName
-              ItemAdditivePrice
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`;
-
-const fetchMenuItems = async () => {
-  const response = await fetch('https://ommi-strapi-base.onrender.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: gqlQUERY,
-    }),
-  });
-  const result = await response.json();
-
-  // Map menu items by categories
-  const categorizedMenuItems = result.data.menuItems.data.reduce((categories: Record<string, Category>, menuItem) => {
-    const categoryName = menuItem.attributes.item_category?.data?.attributes?.categoryName || 'Uncategorized';
-
-    if (!categories[categoryName]) {
-      categories[categoryName] = {
-        categoryName,
-        categoryDescription: menuItem.attributes.item_category?.data?.attributes?.categoryDescription || '',
-        categorySubtext: menuItem.attributes.item_category?.data?.attributes?.categorySubtext || '',
-        items: [],
-      };
-    }
-
-    const additives: Additive[] = menuItem.attributes.item_additives?.data.map((additive) => ({
-      additiveName: additive.attributes.ItemAdditiveName,
-      additivePrice: additive.attributes.ItemAdditivePrice,
-    })) || [];
-
-    categories[categoryName].items.push({
-      item_name: menuItem.attributes.itemName,
-      item_description: menuItem.attributes.itemDescription,
-      item_price: menuItem.attributes.itemPrice,
-      tags: menuItem.attributes.item_tags?.data.map((tag) => ({
-        name: tag.attributes.tagName,
-        color: tag.attributes.tagColorHEX,
-      })) || [],
-      item_image_url: menuItem.attributes.item_image?.data?.attributes?.url || '',
-      additives,
-    });
-
-    return categories;
-  }, {} as Record<string, Category>);
-
-  return Object.values(categorizedMenuItems);
-};
-
-const categorizedMenuItems = await fetchMenuItems();
-
-// const categorizedMenuItems: Category[] = [
-//   {
-//     categoryName: "Brunch",
-//     categoryDescription: "Delicious brunch items to start your day",
-//     categorySubtext: "Available from 9 AM - 2 PM",
-//     items: [
-//       {
-//         item_name: "Avocado Toast",
-//         item_description: "Smashed avocado on toasted sourdough bread",
-//         item_price: 8.00,
-//         tags: [
-//           { name: "Vegan", color: "#8BC34A" },
-//           { name: "Gluten Free", color: "#FFEB3B" }
-//         ],
-//         item_image_url: "/images/avocado-toast.jpg",
-//         additives: [
-//           { additiveName: "Extra Avocado", additivePrice: 2.00 },
-//           { additiveName: "Poached Egg", additivePrice: 1.50 }
-//         ]
-//       },
-//       {
-//         item_name: "Pancakes",
-//         item_description: "Fluffy pancakes with syrup and butter",
-//         item_price: 7.50,
-//         tags: [
-//           { name: "Vegetarian", color: "#FFC107" }
-//         ],
-//         item_image_url: "/images/pancakes.jpg",
-//         additives: [
-//           { additiveName: "Extra Syrup", additivePrice: 1.00 },
-//           { additiveName: "Fruit Toppings", additivePrice: 2.00 }
-//         ]
+// const gqlQUERY = `
+// query GetMenuItems{
+// menuItems (pagination: {limit: 100}){
+//   data {
+//       id
+//       attributes {
+//         itemName
+//         itemDescription
+//         itemPrice
+//         item_category {
+//           data {
+//             id
+//             attributes {
+//               categoryName
+//               categoryDescription
+//               categorySubtext
+//             }
+//           }
+//         }
+//         item_image {
+//           data {
+//             id
+//             attributes {
+//               url
+//             }
+//           }
+//         }
+//         item_tags {
+//           data {
+//             id
+//             attributes {
+//               tagName
+//               tagColorHEX
+//             }
+//           }
+//         }
+//         item_additives{
+//           data{
+//             id
+//             attributes{
+//               ItemAdditiveName
+//               ItemAdditivePrice
+//             }
+//           }
+//         }
 //       }
-//     ]
-//   },
-//   {
-//     categoryName: "Lunch",
-//     categoryDescription: "Hearty meals to keep you going",
-//     categorySubtext: "Available from 12 PM - 5 PM",
-//     items: [
-//       {
-//         item_name: "Grilled Chicken Sandwich",
-//         item_description: "Grilled chicken breast with lettuce and tomato on a bun",
-//         item_price: 10.00,
-//         tags: [
-//           { name: "High Protein", color: "#2196F3" }
-//         ],
-//         item_image_url: "/images/grilled-chicken-sandwich.jpg",
-//         additives: [
-//           { additiveName: "Extra Chicken", additivePrice: 3.00 },
-//           { additiveName: "Bacon", additivePrice: 2.00 }
-//         ]
-//       },
-//       {
-//         item_name: "Caesar Salad",
-//         item_description: "Crisp romaine with Caesar dressing and croutons",
-//         item_price: 9.00,
-//         tags: [
-//           { name: "Vegetarian", color: "#FFC107" },
-//           { name: "Gluten Free", color: "#FFEB3B" }
-//         ],
-//         item_image_url: "/images/caesar-salad.jpg",
-//         additives: [
-//           { additiveName: "Grilled Chicken", additivePrice: 3.00 },
-//           { additiveName: "Shrimp", additivePrice: 4.00 }
-//         ]
-//       }
-//     ]
+//     }
 //   }
-// ];
+// }
+// `;
+
+// const fetchMenuItems = async () => {
+//   const response = await fetch('https://ommi-strapi-base.onrender.com/graphql', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//       query: gqlQUERY,
+//     }),
+//   });
+//   const result = await response.json();
+//
+//   // Map menu items by categories
+//   const categorizedMenuItems = result.data.menuItems.data.reduce((categories: Record<string, Category>, menuItem) => {
+//     const categoryName = menuItem.attributes.item_category?.data?.attributes?.categoryName || 'Uncategorized';
+//
+//     if (!categories[categoryName]) {
+//       categories[categoryName] = {
+//         categoryName,
+//         categoryDescription: menuItem.attributes.item_category?.data?.attributes?.categoryDescription || '',
+//         categorySubtext: menuItem.attributes.item_category?.data?.attributes?.categorySubtext || '',
+//         items: [],
+//       };
+//     }
+//
+//     const additives: Additive[] = menuItem.attributes.item_additives?.data.map((additive) => ({
+//       additiveName: additive.attributes.ItemAdditiveName,
+//       additivePrice: additive.attributes.ItemAdditivePrice,
+//     })) || [];
+//
+//     categories[categoryName].items.push({
+//       item_name: menuItem.attributes.itemName,
+//       item_description: menuItem.attributes.itemDescription,
+//       item_price: menuItem.attributes.itemPrice,
+//       tags: menuItem.attributes.item_tags?.data.map((tag) => ({
+//         name: tag.attributes.tagName,
+//         color: tag.attributes.tagColorHEX,
+//       })) || [],
+//       item_image_url: menuItem.attributes.item_image?.data?.attributes?.url || '',
+//       additives,
+//     });
+//
+//     return categories;
+//   }, {} as Record<string, Category>);
+//
+//   return Object.values(categorizedMenuItems);
+// };
+//
+// const categorizedMenuItems = await fetchMenuItems();
+
+const categorizedMenuItems: Category[] = [
+  {
+    categoryName: "Brunch",
+    categoryDescription: "Delicious brunch items to start your day",
+    categorySubtext: "Available from 9 AM - 2 PM",
+    items: [
+      {
+        item_name: "Avocado Toast",
+        item_description: "Smashed avocado on toasted sourdough bread",
+        item_price: 8.00,
+        tags: [
+          { name: "Vegan", color: "#8BC34A" },
+          { name: "Gluten Free", color: "#FFEB3B" }
+        ],
+        item_image_url: "/images/avocado-toast.jpg",
+        additives: [
+          { additiveName: "Extra Avocado", additivePrice: 2.00 },
+          { additiveName: "Poached Egg", additivePrice: 1.50 }
+        ]
+      },
+      {
+        item_name: "Pancakes",
+        item_description: "Fluffy pancakes with syrup and butter",
+        item_price: 7.50,
+        tags: [
+          { name: "Vegetarian", color: "#FFC107" }
+        ],
+        item_image_url: "/images/pancakes.jpg",
+        additives: [
+          { additiveName: "Extra Syrup", additivePrice: 1.00 },
+          { additiveName: "Fruit Toppings", additivePrice: 2.00 }
+        ]
+      }
+    ]
+  },
+  {
+    categoryName: "Lunch",
+    categoryDescription: "Hearty meals to keep you going",
+    categorySubtext: "Available from 12 PM - 5 PM",
+    items: [
+      {
+        item_name: "Grilled Chicken Sandwich",
+        item_description: "Grilled chicken breast with lettuce and tomato on a bun",
+        item_price: 10.00,
+        tags: [
+          { name: "High Protein", color: "#2196F3" }
+        ],
+        item_image_url: "/images/grilled-chicken-sandwich.jpg",
+        additives: [
+          { additiveName: "Extra Chicken", additivePrice: 3.00 },
+          { additiveName: "Bacon", additivePrice: 2.00 }
+        ]
+      },
+      {
+        item_name: "Caesar Salad",
+        item_description: "Crisp romaine with Caesar dressing and croutons",
+        item_price: 9.00,
+        tags: [
+          { name: "Vegetarian", color: "#FFC107" },
+          { name: "Gluten Free", color: "#FFEB3B" }
+        ],
+        item_image_url: "/images/caesar-salad.jpg",
+        additives: [
+          { additiveName: "Grilled Chicken", additivePrice: 3.00 },
+          { additiveName: "Shrimp", additivePrice: 4.00 }
+        ]
+      }
+    ]
+  }
+];
 ---
 
 <>
@@ -267,7 +266,7 @@ const categorizedMenuItems = await fetchMenuItems();
 
   .item-card {
     text-align: left !important; /* Left-aligns text within each item */
-    align-items: left;
+
   }
 
   .item-card h3 {
