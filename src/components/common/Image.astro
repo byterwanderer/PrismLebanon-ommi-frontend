@@ -59,6 +59,10 @@ if (typeof _image === 'string') {
   !image ? (
     <Fragment />
   ) : (
-    <img src={image.src} crossorigin="anonymous" referrerpolicy="no-referrer" {...image.attributes} />
+  <img src={image.src}
+       crossorigin="anonymous"
+       referrerpolicy="no-referrer"
+       style="width: 100%; height: 100%; object-fit: cover;"
+       {...image.attributes} />
   )
 }

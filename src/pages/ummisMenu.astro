@@ -126,7 +126,7 @@ const fetchMenuItems = async () => {
         color: tag.attributes.tagColorHEX,
       })) || [],
       item_image_url: menuItem.attributes.item_image?.data?.attributes?.url || '',
-      additives, // Add item additives here
+      additives,
     });
 
     return categories;
@@ -137,6 +137,76 @@ const fetchMenuItems = async () => {
 
 const categorizedMenuItems = await fetchMenuItems();
 
+// const categorizedMenuItems: Category[] = [
+//   {
+//     categoryName: "Brunch",
+//     categoryDescription: "Delicious brunch items to start your day",
+//     categorySubtext: "Available from 9 AM - 2 PM",
+//     items: [
+//       {
+//         item_name: "Avocado Toast",
+//         item_description: "Smashed avocado on toasted sourdough bread",
+//         item_price: 8.00,
+//         tags: [
+//           { name: "Vegan", color: "#8BC34A" },
+//           { name: "Gluten Free", color: "#FFEB3B" }
+//         ],
+//         item_image_url: "/images/avocado-toast.jpg",
+//         additives: [
+//           { additiveName: "Extra Avocado", additivePrice: 2.00 },
+//           { additiveName: "Poached Egg", additivePrice: 1.50 }
+//         ]
+//       },
+//       {
+//         item_name: "Pancakes",
+//         item_description: "Fluffy pancakes with syrup and butter",
+//         item_price: 7.50,
+//         tags: [
+//           { name: "Vegetarian", color: "#FFC107" }
+//         ],
+//         item_image_url: "/images/pancakes.jpg",
+//         additives: [
+//           { additiveName: "Extra Syrup", additivePrice: 1.00 },
+//           { additiveName: "Fruit Toppings", additivePrice: 2.00 }
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     categoryName: "Lunch",
+//     categoryDescription: "Hearty meals to keep you going",
+//     categorySubtext: "Available from 12 PM - 5 PM",
+//     items: [
+//       {
+//         item_name: "Grilled Chicken Sandwich",
+//         item_description: "Grilled chicken breast with lettuce and tomato on a bun",
+//         item_price: 10.00,
+//         tags: [
+//           { name: "High Protein", color: "#2196F3" }
+//         ],
+//         item_image_url: "/images/grilled-chicken-sandwich.jpg",
+//         additives: [
+//           { additiveName: "Extra Chicken", additivePrice: 3.00 },
+//           { additiveName: "Bacon", additivePrice: 2.00 }
+//         ]
+//       },
+//       {
+//         item_name: "Caesar Salad",
+//         item_description: "Crisp romaine with Caesar dressing and croutons",
+//         item_price: 9.00,
+//         tags: [
+//           { name: "Vegetarian", color: "#FFC107" },
+//           { name: "Gluten Free", color: "#FFEB3B" }
+//         ],
+//         item_image_url: "/images/caesar-salad.jpg",
+//         additives: [
+//           { additiveName: "Grilled Chicken", additivePrice: 3.00 },
+//           { additiveName: "Shrimp", additivePrice: 4.00 }
+//         ]
+//       }
+//     ]
+//   }
+// ];
 ---
 
 <>

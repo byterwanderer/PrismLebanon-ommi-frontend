@@ -12,7 +12,6 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 // import Content from '~/components/widgets/Content.astro';
 import Button from '~/components/ui/Button.astro';
 import Image from '~/components/common/Image.astro';
-
 // Importing Tabler Icons
 import { IconBrandTwitter, IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
 
@@ -33,12 +32,12 @@ const socialLinks = [
   <div class="heroSection">
     <div class="heroOverlay"></div>
     <!--<img id="heroSectionBackImage" src='~/assets/images/mezze-table.jpg' alt="mezze table image" />-->
-    <Image
-      id="heroSectionBackImage"
-      height="auto"
-      width=""
-      src="~/assets/images/mezze-table.jpg"
-      alt="mezze table image"
+    <Image id="heroSectionBackImage"
+           height="auto"
+           width=""
+           src="~/assets/images/mezze-table.jpg"
+           alt="mezze table image"
+           loading="eager"
     />
     <div id="heroElement">
       <Hero
@@ -191,7 +190,7 @@ const socialLinks = [
     <Fragment slot="title"> Follow Us on Social Media </Fragment>
 
     <Fragment slot="subtitle">
-      Follow us on social platforms to stay in loop on evrything Ummi's. <br class="hidden md:inline" />No Time To
+      Follow us on social platforms to stay in loop on everything Ummi's. <br class="hidden md:inline" />No Time To
       Waste! :P
     </Fragment>
   </CallToAction>
@@ -218,7 +217,7 @@ const socialLinks = [
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensures the image covers the entire container */
+    object-fit: cover; /* Ensures the image covers the entire container */
     z-index: -1; /* Place the image behind other content */
   }
 
